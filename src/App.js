@@ -7,7 +7,6 @@ import Repositories from './components/Repositories'
 import Header from './components/Header'
 
 function App() {
-  console.log(useMyContext())
   const { showFollowers, showFollowing, showRepos } = useMyContext()
 
   const setType = () => {

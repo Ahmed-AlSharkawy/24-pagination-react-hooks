@@ -4,7 +4,6 @@ import { useMyContext } from '../Context'
 const UserDetails = (props) => {
   const { toggleShows } = useMyContext()
 
-  console.log(props.user)
   const {
     login,
     name,

@@ -7,7 +7,6 @@ const Header = ({ type }) => {
   const [showModal, setShowModal] = useState(false)
 
   if (error) {
-    console.log(error)
     return (
       <h2
         style={{
