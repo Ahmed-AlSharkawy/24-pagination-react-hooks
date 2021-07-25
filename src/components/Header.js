@@ -31,9 +31,8 @@ const Header = ({ type }) => {
       >
         <h2>{user.message}</h2>
         <h3>
-          documentation url {'\n'}
           <a href={user.documentation_url} target='_blank' rel='noreferrer'>
-            {user.documentation_url}
+            documentation url
           </a>
         </h3>
       </div>

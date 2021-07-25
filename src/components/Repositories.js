@@ -1,11 +1,24 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useMyContext } from '../Context'
 import { useFetchRepositories } from '../fetch/useFetchRepositories'
+import Pages from './Pages'
 import Repository from './Repository'
 
 const Repositories = () => {
   const { login } = useMyContext()
-  const { repositories, error } = useFetchRepositories(login)
+  const { loading, repositories, error } = useFetchRepositories(login)
+  const [pageNumber, setPageNumber] = useState(0)
+  const [repositoriesPage, setRepositoriesPage] = useState([])
+  const [currentSetArray, setCurrentSetArray] = useState([])
+  const currentSet = useRef(0)
+
+  useEffect(() => {
+    setPageNumber(0)
+  }, [repositories])
+
+  useEffect(() => {
+    if (!loading) setRepositoriesPage(repositories[pageNumber])
+  }, [repositories, loading, pageNumber])
 
   if (error) {
     return (
@@ -32,13 +45,12 @@ const Repositories = () => {
       >
         <h2>{repositories.message}</h2>
         <h3>
-          documentation url {'\n'}
           <a
             href={repositories.documentation_url}
             target='_blank'
             rel='noreferrer'
           >
-            {repositories.documentation_url}
+            documentation url
           </a>
         </h3>
       </div>
@@ -47,13 +59,35 @@ const Repositories = () => {
 
   return (
     <main>
+      {loading || (
+        <Pages
+          dataPage={repositoriesPage}
+          data={repositories}
+          pageNumber={pageNumber}
+          setPageNumber={setPageNumber}
+          currentSetArray={currentSetArray}
+          setCurrentSetArray={setCurrentSetArray}
+          currentSet={currentSet}
+        />
+      )}
       <section className='followers'>
         <div className='container'>
-          {repositories.map((repo) => {
+          {repositoriesPage.map((repo) => {
             return <Repository key={repo.id} {...repo} />
           })}
         </div>
       </section>
+      {loading || (
+        <Pages
+          dataPage={repositoriesPage}
+          data={repositories}
+          pageNumber={pageNumber}
+          setPageNumber={setPageNumber}
+          currentSetArray={currentSetArray}
+          setCurrentSetArray={setCurrentSetArray}
+          currentSet={currentSet}
+        />
+      )}
     </main>
   )
 }

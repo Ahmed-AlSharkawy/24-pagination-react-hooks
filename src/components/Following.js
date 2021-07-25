@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useMyContext } from '../Context'
 import { useFetchFollowing } from '../fetch/useFetchFollowing'
+import Pages from './Pages'
 import User from './User'
 
 const Following = () => {
   const { login } = useMyContext()
-  const { following, error } = useFetchFollowing(login)
+  const { loading, following, error } = useFetchFollowing(login)
+  const [pageNumber, setPageNumber] = useState(0)
+  const [followingPage, setFollowingPage] = useState([])
+  const [currentSetArray, setCurrentSetArray] = useState([])
+  const currentSet = useRef(0)
+  useEffect(() => {
+    setPageNumber(0)
+  }, [following])
+
+  useEffect(() => {
+    if (!loading) setFollowingPage(following[pageNumber])
+  }, [following, loading, pageNumber])
 
   if (error) {
     return (
@@ -32,13 +44,12 @@ const Following = () => {
       >
         <h2>{following.message}</h2>
         <h3>
-          documentation url {'\n'}
           <a
             href={following.documentation_url}
             target='_blank'
             rel='noreferrer'
           >
-            {following.documentation_url}
+            documentation url
           </a>
         </h3>
       </div>
@@ -47,13 +58,35 @@ const Following = () => {
 
   return (
     <main>
+      {loading || (
+        <Pages
+          dataPage={followingPage}
+          data={following}
+          pageNumber={pageNumber}
+          setPageNumber={setPageNumber}
+          currentSetArray={currentSetArray}
+          setCurrentSetArray={setCurrentSetArray}
+          currentSet={currentSet}
+        />
+      )}
       <section className='followers'>
         <div className='container'>
-          {following.map((follow) => {
+          {followingPage.map((follow) => {
             return <User key={follow.id} {...follow} />
           })}
         </div>
       </section>
+      {loading || (
+        <Pages
+          dataPage={followingPage}
+          data={following}
+          pageNumber={pageNumber}
+          setPageNumber={setPageNumber}
+          currentSetArray={currentSetArray}
+          setCurrentSetArray={setCurrentSetArray}
+          currentSet={currentSet}
+        />
+      )}
     </main>
   )
 }

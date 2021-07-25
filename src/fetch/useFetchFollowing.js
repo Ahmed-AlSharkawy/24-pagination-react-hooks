@@ -18,7 +18,7 @@ export const useFetchFollowing = () => {
     try {
       const response = await fetch(url)
       const data = await response.json()
-      setFollowing(data)
+      setFollowing(paginate(data, 10))
     } catch (err) {
       setError(err)
     } finally {

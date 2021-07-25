@@ -18,7 +18,7 @@ export const useFetchRepositories = () => {
     try {
       const response = await fetch(url)
       const data = await response.json()
-      setRepositories(data)
+      setRepositories(paginate(data, 10))
     } catch (err) {
       setError(err)
     } finally {
