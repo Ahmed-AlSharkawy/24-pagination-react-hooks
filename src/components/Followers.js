@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useMyContext } from '../Context'
-import { useFetchFollowers } from '../fetch/useFetchFollowers'
+import { useFetchPages } from '../fetch/useFetchPages'
 import Pages from './Pages'
 import User from './User'
 
 const Followers = () => {
-  const { login } = useMyContext()
-  const { loading, followers, error } = useFetchFollowers(login)
+  const { loading, data: followers, error } = useFetchPages('followers')
   const [pageNumber, setPageNumber] = useState(0)
   const [followersPage, setFollowersPage] = useState([])
   const [currentSetArray, setCurrentSetArray] = useState([])

@@ -208,7 +208,7 @@ main {
   border-color: transparent;
   border-radius: 5px;
   cursor: pointer;
-  margin: 0.5rem;
+  margin: 0.5rem 0.1rem;
   transition: var(--transition);
 }
 .active-btn {
@@ -222,11 +222,17 @@ main {
   font-weight: bold;
   text-transform: capitalize;
   letter-spacing: var(--spacing);
-  margin: 0.5rem;
+  margin: 0.5rem 0.1rem;
   font-size: 1rem;
   cursor: pointer;
 }
-
+@media screen and (min-width: 370px) {
+  .page-btn,
+  .prev-btn,
+  .next-btn {
+    margin: 0.5rem;
+  }
+}
 @media screen and (min-width: 775px) {
   .btn-container {
     margin: 0 auto;
@@ -253,7 +259,7 @@ main {
   margin: 3rem auto; /* 15% from the top and centered */
   padding: 1rem 2rem;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 95%; /* Could be more or less, depending on screen size */
   max-width: 40rem;
 }
 
@@ -272,8 +278,16 @@ main {
   cursor: pointer;
 }
 .modal-body {
-  width: 80%;
+  width: 95%;
   margin: 2rem auto;
+}
+@media screen and (min-width: 576px) {
+  .modal-content {
+    width: 80%;
+  }
+  .modal-body {
+    width: 80%;
+  }
 }
 .label {
   border-right: 1px solid darkblue;
@@ -297,4 +311,81 @@ main {
 .clone {
   width: 100%;
   margin: 1rem auto;
+}
+
+.pages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}
+@media screen and (min-width: 700px) {
+  .pages-container {
+    width: 95%;
+    flex-direction: row;
+
+    /* justify-content: space-between; */
+    /* grid-template-columns: repeat */
+  }
+}
+
+.info-btn {
+  background-color: lightskyblue;
+  color: white;
+  margin: 0 auto;
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.75rem;
+}
+.info-btn span {
+  color: black;
+}
+
+.info-navigate {
+  margin: 0 auto;
+  display: inline-block;
+  display: flex;
+  column-gap: 0.5rem;
+}
+.info-btn-arrow {
+  background-color: lightskyblue;
+  color: black;
+  margin: 0 auto;
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  width: 4.5rem;
+  text-align: center;
+}
+span.info-btn {
+  color: black;
+}
+input.info-btn {
+  width: 4rem;
+  padding: 0.3rem 0.5rem;
+  border: none;
+  color: white;
+  text-align: center;
+  outline: none;
+  font-size: 0.875rem;
+  font-weight: bold;
+  letter-spacing: var(--spacing);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+input.info-btn::placeholder {
+  color: bisque;
+  font-size: 0.9rem;
+}
+@media screen and (min-width: 800px) {
+  input.info-btn {
+    font-size: 1rem;
+  }
 }

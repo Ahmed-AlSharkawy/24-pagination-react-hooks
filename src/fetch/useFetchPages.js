@@ -1,28 +1,17 @@
-/**
- *
- *
- *
- * NOT USEABLE AFTER REFACTORING
- *
- *
- *
- */
-
 import { useState, useEffect, useCallback } from 'react'
 import { useMyContext } from '../Context'
 import paginate from '../utils'
 
 const mainURL = 'https://api.github.com/users/'
-const urlSuffix = '/followers?per_page=100&page='
+const urlSuffix = '?per_page=100&page='
 
-export const useFetchFollowers = () => {
-  const { login } = useMyContext()
-  const basicURL = `${mainURL}${login}${urlSuffix}`
+export const useFetchPages = (type) => {
+  const { login, page } = useMyContext()
+  const basicURL = `${mainURL}${login}/${type}${urlSuffix}`
 
   const [loading, setLoading] = useState(true)
-  const [followers, setFollowers] = useState([[]])
+  const [data, setData] = useState([[]])
   const [error, setError] = useState(null)
-  const [page, setPage] = useState(1)
 
   const getFollowers = useCallback(async () => {
     const url = `${basicURL}${page}`
@@ -30,8 +19,8 @@ export const useFetchFollowers = () => {
     try {
       setLoading(true)
       const response = await fetch(url)
-      const data = await response.json()
-      setFollowers(paginate(data, 10))
+      const pageData = await response.json()
+      setData(paginate(pageData, 10))
     } catch (err) {
       setError(err)
     } finally {
@@ -43,5 +32,5 @@ export const useFetchFollowers = () => {
     getFollowers()
   }, [getFollowers, basicURL, page])
 
-  return { loading, followers, error, page, setPage }
+  return { loading, data, error }
 }

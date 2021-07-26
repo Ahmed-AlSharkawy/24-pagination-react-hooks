@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useMyContext } from '../Context'
-import { useFetchRepositories } from '../fetch/useFetchRepositories'
+import { useFetchPages } from '../fetch/useFetchPages'
 import Pages from './Pages'
 import Repository from './Repository'
 
 const Repositories = () => {
-  const { login } = useMyContext()
-  const { loading, repositories, error } = useFetchRepositories(login)
+  const { loading, data: repositories, error } = useFetchPages('repos')
   const [pageNumber, setPageNumber] = useState(0)
   const [repositoriesPage, setRepositoriesPage] = useState([])
   const [currentSetArray, setCurrentSetArray] = useState([])

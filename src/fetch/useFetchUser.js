@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useMyContext } from '../Context'
-// const defaultURL = 'https://api.github.com/users/john-smilga'
+
 const mainURL = 'https://api.github.com/users/'
 
 export const useFetchUser = () => {

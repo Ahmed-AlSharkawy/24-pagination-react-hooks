@@ -7,6 +7,8 @@ export default function Provider({ children }) {
   const [showFollowing, setShowFollowing] = useState(false)
   const [showRepos, setShowRepos] = useState(false)
   const [login, setLogin] = useState('john-smilga')
+  const [page, setPage] = useState(1)
+  const [pageCount, setPageCount] = useState(62)
 
   const toggleShows = (whatToShow, userLogin = 'john-smilga') => {
     if (whatToShow === 'followers') {
@@ -24,9 +26,20 @@ export default function Provider({ children }) {
     }
     setLogin(userLogin)
   }
+
   return (
     <Context.Provider
-      value={{ showFollowers, showFollowing, showRepos, login, toggleShows }}
+      value={{
+        showFollowers,
+        showFollowing,
+        showRepos,
+        login,
+        toggleShows,
+        page,
+        setPage,
+        pageCount,
+        setPageCount,
+      }}
     >
       {children}
     </Context.Provider>

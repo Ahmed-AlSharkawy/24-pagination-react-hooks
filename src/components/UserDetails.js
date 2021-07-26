@@ -2,7 +2,7 @@ import React from 'react'
 import { useMyContext } from '../Context'
 
 const UserDetails = (props) => {
-  const { toggleShows } = useMyContext()
+  const { toggleShows, setPage, setPageCount } = useMyContext()
 
   const {
     login,
@@ -31,16 +31,18 @@ const UserDetails = (props) => {
           <h4
             style={{ margin: '1rem auto 0.5rem auto' }}
           >{`name : ${name}  `}</h4>
-          <a
-            className='btn'
-            style={{ fontSize: '0.6rem' }}
-            href={html_url}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            show profile
-          </a>
 
+          <button className='btn'>
+            <a
+              className='btn'
+              style={{ fontSize: '0.6rem' }}
+              href={html_url}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              show profile
+            </a>
+          </button>
           <h4 style={{ margin: '1rem auto 0.5rem auto' }}>
             location : {location}
           </h4>
@@ -54,6 +56,8 @@ const UserDetails = (props) => {
               style={{ fontSize: '0.6rem' }}
               onClick={() => {
                 props.onClose()
+                setPage(1)
+                setPageCount(Math.ceil(public_repos / 100))
                 toggleShows('repos', login)
               }}
             >
@@ -69,6 +73,8 @@ const UserDetails = (props) => {
               style={{ fontSize: '0.6rem' }}
               onClick={() => {
                 props.onClose()
+                setPage(1)
+                setPageCount(Math.ceil(followers / 100))
                 toggleShows('followers', login)
               }}
             >
@@ -84,6 +90,8 @@ const UserDetails = (props) => {
               style={{ fontSize: '0.6rem' }}
               onClick={() => {
                 props.onClose()
+                setPage(1)
+                setPageCount(Math.ceil(following / 100))
                 toggleShows('following', login)
               }}
             >
