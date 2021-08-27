@@ -1,12 +1,14 @@
 import React from 'react'
 import { useMyContext } from './Context'
-
 import Followers from './components/Followers'
 import Following from './components/Following'
 import Repositories from './components/Repositories'
 import Header from './components/Header'
 
 function App() {
+  console.log('hello')
+
+  console.log(window.location.ancestorOrigins)
   const { showFollowers, showFollowing, showRepos } = useMyContext()
 
   const setType = () => {

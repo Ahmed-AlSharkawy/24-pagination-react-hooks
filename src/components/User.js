@@ -40,13 +40,21 @@ const User = ({ login, avatar_url, html_url }) => {
 
       <button
         className='btn'
-        style={{ marginTop: '1rem' }}
+        style={{ marginTop: '1rem', marginBottom: '0.5rem' }}
         onClick={() => {
           getUser()
         }}
       >
         details
       </button>
+      <a
+        href={`https://githubusers-fusioncharts-auth0-react.netlify.app/${login}`}
+        target='_blank'
+        rel='noopener noreferrer'
+        className='btn'
+      >
+        advanced app
+      </a>
     </article>
   )
 }

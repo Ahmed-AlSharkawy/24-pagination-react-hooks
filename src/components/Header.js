@@ -47,13 +47,22 @@ const Header = ({ type }) => {
       <div className='section-title'>
         <h1>{loading ? 'loading ...' : `${user.name} ${type}`}</h1>
         {loading || (
-          <button
-            className='btn'
-            style={{ marginTop: '1rem', padding: '0.5rem 1.5rem' }}
-            onClick={() => setShowModal(true)}
+          <div
+            className='buttons-container'
+            // style={{ marginTop: '1rem', padding: '0.5rem 1.5rem' }}
           >
-            details
-          </button>
+            <button className='btn' onClick={() => setShowModal(true)}>
+              additional details
+            </button>
+            <a
+              href={`https://githubusers-fusioncharts-auth0-react.netlify.app/${user.login}`}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='btn'
+            >
+              open in advanced app
+            </a>
+          </div>
         )}
 
         <div className='underline'></div>
